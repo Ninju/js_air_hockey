@@ -1,0 +1,7 @@
+{
+    output: "physics_demo.js",
+
+    paths: {
+        "src" : "/"
+    }
+}
