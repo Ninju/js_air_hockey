@@ -23,6 +23,43 @@ var COLORS = {
   blue : "blue"
 }
 
+var assets = [
+  "winner.wav",
+  "buzzer.wav",
+  "goalScore.wav",
+  "puckHitPaddle.wav",
+  "puckHitWall.wav"
+];
+
+var loadAssets = function( assets, onComplete ) {
+  var current, ext, obj, totalLoaded = 0, total = assets.length;
+
+  for( var i = 0; i < assets.length; i++ ) {
+    current = assets[ i ];
+    ext     = current.substr( current.lastIndexOf( "." ) + 1 ).toLowerCase();
+
+    if( ext === "mp3" || ext === "wav" || ext === "ogg" || ext === "mp4" ) {
+      obj = new Audio( current );
+    } else if( ext === "jpg" || ext === "jpeg" || ext === "gif" || ext === "png" ) {
+      obj     = new Image();
+      obj.src = "/resources/" + current;
+    } else {
+      total--;
+      continue;
+    }
+
+    obj.onload = function() {
+      totalLoaded++;
+
+      if( totalLoaded == total ) {
+        if( onComplete ) { onComplete(); }
+      }
+    }
+  }
+}
+
+loadAssets( assets );
+
 var Splash = cocos.nodes.Layer.extend( {
   init : function() {
     Splash.superclass.init.call( this );
@@ -651,34 +688,4 @@ var scene = cocos.nodes.Scene.create();
 scene.addChild( { child: Splash.create() } );
 
 // Run the scene
-var assets = [
-  "spaddle.png",
-  "spuck.png",
-  "titleSplash.png",
-  "playButton.png",
-  "screenshot.png",
-  "redPlayerWins.png",
-  "bluePlayerWins.png",
-  "rematchButton.png",
-  "sLeftWall.png",
-  "sRightWall.png",
-  "groundbg.png",
-  "sredBar.png",
-  "sblueBar.png",
-  "goal.png",
-  "winner.wav",
-  "buzzer.wav",
-  "goalScore.wav",
-  "puckHitPaddle.wav",
-  "puckHitWall.wav"
-]
-
-
-// preload the assets
-for( i = 0; i < assets.length; i++ ) {
-  var url = assets[ i ];
-  var img = new Image();
-  img.src = url;
-}
-
-director.runWithScene(scene);
+director.runWithScene( scene );
