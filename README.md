@@ -1,4 +1,4 @@
-js_air_hockey
-=============
+Cocos2D Javascript Air Hockey
+=============================
 
-Air Hockey game written in Javascript using the Cocos2d Javascript games framework and Box2d physics engine.
+Air Hockey game using the [Cocos2D Javascript](https://github.com/ryanwilliams/cocos2d-javascript) games framework and [Box2D physics engine](https://github.com/erincatto/Box2D).
